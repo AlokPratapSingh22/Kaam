@@ -1,3 +1,5 @@
+"use client";
+
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,7 +30,7 @@ import { useSignUp } from "../api/use-signup";
 
 export const SignUpCard = () => {
 
-    const { mutate } = useSignUp();
+    const { mutate, isPending } = useSignUp();
 
     const form = useForm<z.infer<typeof signupSchema>>({
         resolver: zodResolver(signupSchema),
@@ -112,8 +114,8 @@ export const SignUpCard = () => {
                                 </FormItem>
                             )}
                         />
-                        <Button disabled={false} size="lg" className="w-full">
-                            Login
+                        <Button disabled={isPending} size="lg" className="w-full">
+                            Register
                         </Button>
                     </form>
                 </Form>
@@ -122,13 +124,13 @@ export const SignUpCard = () => {
                 <DottedSeperator />
             </div>
             <CardContent className="p-7 flex flex-col gap-y-4">
-                <Button variant="secondary" size="lg" disabled={false}>
+                <Button variant="secondary" size="lg" disabled={isPending}>
                     <FcGoogle className="mr-2 size-5" />
-                    LogIn with Google
+                    SignUp with Google
                 </Button>
-                <Button variant="secondary" size="lg" disabled={false}>
+                <Button variant="secondary" size="lg" disabled={isPending}>
                     <FaGithub className="mr-2 size-5" />
-                    LogIn with Github
+                    SignUp with Github
                 </Button>
             </CardContent>
             <div className="px-7">
